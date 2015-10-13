@@ -19,7 +19,9 @@ func (c *Config) Set(config *elasticsearch.Config) {
 	if config.HTTPClient != nil {
 		c.WithHTTPClient(config.HTTPClient)
 	}
-	c.SetEndpoint(config.GetEndpoint())
+	if endpoint := config.GetEndpoint(); len(endpoint) > 0 {
+		c.SetEndpoint(endpoint)
+	}
 }
 
 // SetCredentials sets a config Credentials value

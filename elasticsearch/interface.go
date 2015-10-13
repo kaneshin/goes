@@ -1,9 +1,6 @@
 package elasticsearch
 
-import (
-	"github.com/aws/aws-sdk-go/aws/request"
-	"github.com/aws/aws-sdk-go/service/elasticsearchservice"
-)
+import ()
 
 type Interface interface {
 	// AddTagsRequest(*elasticsearchservice.AddTagsInput) (*request.Request, *elasticsearchservice.AddTagsOutput)

@@ -10,17 +10,9 @@ import (
 func TestProvider(t *testing.T) {
 	assert := assert.New(t)
 
-	provider := NewProvider()
+	provider := NewAdaptableProvider("id", "secret", "token")
 	assert.NotNil(provider)
 	v, err := provider.Retrieve()
-	assert.Equal(credentials.Value{}, v)
-	assert.Error(err)
-	assert.True(provider.IsExpired())
-	assert.False(provider.retrieved)
-
-	provider = NewStaticProvider("id", "secret", "token")
-	assert.NotNil(provider)
-	v, err = provider.Retrieve()
 	assert.Equal(credentials.Value{"id", "secret", "token"}, v)
 	assert.NoError(err)
 	assert.False(provider.IsExpired())

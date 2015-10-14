@@ -13,10 +13,10 @@ func NewCredentials(provider credentials.Provider) *Credentials {
 	return &Credentials{credentials.NewCredentials(provider)}
 }
 
-// NewStaticCredentials returns a pointer to a new Credentials object
-// wrapping a static credentials value provider.
-func NewStaticCredentials(id, secret, token string) *Credentials {
-	return NewCredentials(NewStaticProvider(id, secret, token))
+// NewAdaptableCredentials returns a pointer to a new Credentials object
+// wrapping static and environment credentials value provider.
+func NewAdaptableCredentials(id, secret, token string) *Credentials {
+	return NewCredentials(NewAdaptableProvider(id, secret, token))
 }
 
 // Getaws gets a config of aws

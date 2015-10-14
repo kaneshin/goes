@@ -9,7 +9,7 @@ import (
 func TestCredentials(t *testing.T) {
 	assert := assert.New(t)
 
-	creds := NewStaticCredentials("", "", "")
+	creds := NewAdaptableCredentials("", "", "")
 	assert.NotNil(creds)
 	assert.NotNil(creds.Getaws())
 }

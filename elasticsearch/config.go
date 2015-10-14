@@ -5,10 +5,6 @@ import (
 	"net/url"
 )
 
-const (
-	defaultURL = "http://127.0.0.1:9200"
-)
-
 type Config struct {
 	url string
 

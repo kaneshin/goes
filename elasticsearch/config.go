@@ -13,13 +13,22 @@ type Config struct {
 	// configuration.
 	MaxRetries int
 
+	// Healthchecks enabled or disabled
+	HealthcheckEnabled bool
+
+	// Sniffer enabled or disabled
+	SnifferEnabled bool
+
 	// The HTTP client to use when sending requests.
 	HTTPClient *http.Client
 }
 
 // NewConfig returns a new Config pointer
 func NewConfig() *Config {
-	return &Config{}
+	return &Config{
+		HealthcheckEnabled: true,
+		SnifferEnabled:     true,
+	}
 }
 
 func (c *Config) GetURL() string {
@@ -38,10 +47,14 @@ func (c *Config) SetEndpoint(endpoint string) {
 	c.SetURL(endpoint)
 }
 
-func (c *Config) IsSSL() bool {
+func (c *Config) GetScheme() string {
 	url, err := url.Parse(c.url)
 	if err != nil {
-		return false
+		return ""
 	}
-	return url.Scheme == "https"
+	return url.Scheme
+}
+
+func (c *Config) IsSSL() bool {
+	return c.GetScheme() == "https"
 }

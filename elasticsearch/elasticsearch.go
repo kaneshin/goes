@@ -40,3 +40,19 @@ func (e *Elasticsearch) CreateIndexIfNotExists(index string) (*elastic.CreateInd
 	}
 	return createIndex, nil
 }
+
+func (e *Elasticsearch) PutMapping(index, typ string, mapping interface{}) (*elastic.PutMappingResponse, error) {
+	putMappingService := elastic.NewPutMappingService(e.Client)
+	putMappingService.AllowNoIndices(true)
+
+	switch mapping.(type) {
+	case string:
+		putMappingService.BodyString(mapping.(string))
+	case map[string]interface{}:
+		putMappingService.BodyJson(mapping.(map[string]interface{}))
+	default:
+		return nil, nil
+	}
+
+	return putMappingService.Do()
+}
